@@ -1,0 +1,324 @@
+[
+  {
+    "file": "brandeis1.jpg",
+    "alt": "Graduation portrait photographed at Brandeis University",
+    "category": "portraits",
+    "subtag": "graduation",
+    "featured": true,
+    "order": 0
+  },
+  {
+    "file": "brandeis2.jpg",
+    "alt": "Graduation portrait photographed at Brandeis University",
+    "category": "portraits",
+    "subtag": "graduation",
+    "featured": false,
+    "order": 1
+  },
+  {
+    "file": "brandeis3.jpg",
+    "alt": "Graduation portrait photographed at Brandeis University",
+    "category": "portraits",
+    "subtag": "graduation",
+    "featured": false,
+    "order": 2
+  },
+  {
+    "file": "brandeis4.jpg",
+    "alt": "Graduation portrait photographed at Brandeis University",
+    "category": "portraits",
+    "subtag": "graduation",
+    "featured": false,
+    "order": 3
+  },
+  {
+    "file": "brandeis5.jpg",
+    "alt": "Graduation portrait photographed at Brandeis University",
+    "category": "portraits",
+    "subtag": "graduation",
+    "featured": false,
+    "order": 4
+  },
+  {
+    "file": "brandeis6.jpg",
+    "alt": "Graduation portrait photographed at Brandeis University",
+    "category": "portraits",
+    "subtag": "graduation",
+    "featured": false,
+    "order": 5
+  },
+  {
+    "file": "brandeis7.jpg",
+    "alt": "Graduation portrait photographed at Brandeis University",
+    "category": "portraits",
+    "subtag": "graduation",
+    "featured": false,
+    "order": 6
+  },
+  {
+    "file": "brandeis8.jpg",
+    "alt": "Graduation portrait photographed at Brandeis University",
+    "category": "portraits",
+    "subtag": "graduation",
+    "featured": true,
+    "order": 7
+  },
+  {
+    "file": "brandeis9.jpg",
+    "alt": "Graduation portrait photographed at Brandeis University",
+    "category": "portraits",
+    "subtag": "graduation",
+    "featured": false,
+    "order": 8
+  },
+  {
+    "file": "brandeis10.jpg",
+    "alt": "Graduation portrait photographed at Brandeis University",
+    "category": "portraits",
+    "subtag": "graduation",
+    "featured": false,
+    "order": 9
+  },
+  {
+    "file": "brandeis11.jpg",
+    "alt": "Graduation portrait photographed at Brandeis University",
+    "category": "portraits",
+    "subtag": "graduation",
+    "featured": false,
+    "order": 10
+  },
+  {
+    "file": "brandeis12.jpg",
+    "alt": "Graduation portrait photographed at Brandeis University",
+    "category": "portraits",
+    "subtag": "graduation",
+    "featured": false,
+    "order": 11
+  },
+  {
+    "file": "brandeis13.jpg",
+    "alt": "Graduation portrait photographed at Brandeis University",
+    "category": "portraits",
+    "subtag": "graduation",
+    "featured": false,
+    "order": 12
+  },
+  {
+    "file": "brandeis14.jpg",
+    "alt": "Graduation portrait photographed at Brandeis University",
+    "category": "portraits",
+    "subtag": "graduation",
+    "featured": false,
+    "order": 13
+  },
+  {
+    "file": "brandeis15.jpg",
+    "alt": "Graduation portrait photographed at Brandeis University",
+    "category": "portraits",
+    "subtag": "graduation",
+    "featured": false,
+    "order": 14
+  },
+  {
+    "file": "brandeis16.jpg",
+    "alt": "Graduation portrait photographed at Brandeis University",
+    "category": "portraits",
+    "subtag": "graduation",
+    "featured": false,
+    "order": 15
+  },
+  {
+    "file": "brandeis17.jpg",
+    "alt": "Graduation portrait photographed at Brandeis University",
+    "category": "portraits",
+    "subtag": "graduation",
+    "featured": false,
+    "order": 16
+  },
+  {
+    "file": "brandeis18.jpg",
+    "alt": "Graduation portrait photographed at Brandeis University",
+    "category": "portraits",
+    "subtag": "graduation",
+    "featured": false,
+    "order": 17
+  },
+  {
+    "file": "brandeis19.jpg",
+    "alt": "Graduation portrait photographed at Brandeis University",
+    "category": "portraits",
+    "subtag": "graduation",
+    "featured": false,
+    "order": 18
+  },
+  {
+    "file": "harvard1.jpg",
+    "alt": "Graduation portrait photographed at Harvard University",
+    "category": "portraits",
+    "subtag": "graduation",
+    "featured": true,
+    "order": 19
+  },
+  {
+    "file": "harvard2.jpg",
+    "alt": "Graduation portrait photographed at Harvard University",
+    "category": "portraits",
+    "subtag": "graduation",
+    "featured": false,
+    "order": 20
+  },
+  {
+    "file": "harvard3.jpg",
+    "alt": "Graduation portrait photographed at Harvard University",
+    "category": "portraits",
+    "subtag": "graduation",
+    "featured": false,
+    "order": 21
+  },
+  {
+    "file": "harvard4.jpg",
+    "alt": "Graduation portrait photographed at Harvard University",
+    "category": "portraits",
+    "subtag": "graduation",
+    "featured": false,
+    "order": 22
+  },
+  {
+    "file": "harvard5.jpg",
+    "alt": "Graduation portrait photographed at Harvard University",
+    "category": "portraits",
+    "subtag": "graduation",
+    "featured": true,
+    "order": 23
+  },
+  {
+    "file": "harvard6.jpg",
+    "alt": "Graduation portrait photographed at Harvard University",
+    "category": "portraits",
+    "subtag": "graduation",
+    "featured": false,
+    "order": 24
+  },
+  {
+    "file": "harvard7.jpg",
+    "alt": "Graduation portrait photographed at Harvard University",
+    "category": "portraits",
+    "subtag": "graduation",
+    "featured": false,
+    "order": 25
+  },
+  {
+    "file": "harvard8.jpg",
+    "alt": "Graduation portrait photographed at Harvard University",
+    "category": "portraits",
+    "subtag": "graduation",
+    "featured": false,
+    "order": 26
+  },
+  {
+    "file": "harvard9.jpg",
+    "alt": "Graduation portrait photographed at Harvard University",
+    "category": "portraits",
+    "subtag": "graduation",
+    "featured": false,
+    "order": 27
+  },
+  {
+    "file": "landscape1.jpg",
+    "alt": "Landscape photograph",
+    "category": "landscape",
+    "featured": true,
+    "order": 28
+  },
+  {
+    "file": "landscape2.jpg",
+    "alt": "Landscape photograph",
+    "category": "landscape",
+    "featured": false,
+    "order": 29
+  },
+  {
+    "file": "landscape3.jpg",
+    "alt": "Landscape photograph",
+    "category": "landscape",
+    "featured": false,
+    "order": 30
+  },
+  {
+    "file": "landscape4.jpg",
+    "alt": "Landscape photograph",
+    "category": "landscape",
+    "featured": false,
+    "order": 31
+  },
+  {
+    "file": "landscape5.jpg",
+    "alt": "Landscape photograph",
+    "category": "landscape",
+    "featured": true,
+    "order": 32
+  },
+  {
+    "file": "landscape6.jpg",
+    "alt": "Landscape photograph",
+    "category": "landscape",
+    "featured": false,
+    "order": 33
+  },
+  {
+    "file": "landscape7.jpg",
+    "alt": "Landscape photograph",
+    "category": "landscape",
+    "featured": false,
+    "order": 34
+  },
+  {
+    "file": "landscape8.jpg",
+    "alt": "Landscape photograph",
+    "category": "landscape",
+    "featured": false,
+    "order": 35
+  },
+  {
+    "file": "landscape9.jpg",
+    "alt": "Landscape photograph",
+    "category": "landscape",
+    "featured": true,
+    "order": 36
+  },
+  {
+    "file": "landscape10.jpg",
+    "alt": "Landscape photograph",
+    "category": "landscape",
+    "featured": false,
+    "order": 37
+  },
+  {
+    "file": "landscape11.jpg",
+    "alt": "Landscape photograph",
+    "category": "landscape",
+    "featured": false,
+    "order": 38
+  },
+  {
+    "file": "landscape12.jpg",
+    "alt": "Landscape photograph",
+    "category": "landscape",
+    "featured": false,
+    "order": 39
+  },
+  {
+    "file": "landscape13.jpg",
+    "alt": "Landscape photograph",
+    "category": "landscape",
+    "featured": false,
+    "order": 40
+  },
+  {
+    "file": "street1.jpg",
+    "alt": "Street photograph",
+    "category": "street",
+    "featured": true,
+    "order": 41
+  }
+]

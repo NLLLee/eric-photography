@@ -1,0 +1,28 @@
+# build output
+dist/
+.output/
+.vercel/
+
+# astro
+.astro/
+
+# deps
+node_modules/
+
+# env
+.env
+.env.production
+.env.local
+
+# os / editor
+.DS_Store
+*.log
+.idea/
+.vscode/
+
+# raw originals you drop in for processing (keep the folder, ignore the heavy files)
+_incoming/*
+!_incoming/.gitkeep
+
+# local editor / agent config
+.claude/

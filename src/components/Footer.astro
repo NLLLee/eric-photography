@@ -1,0 +1,122 @@
+---
+import { site } from '../lib/site';
+import { categories } from '../lib/categories';
+
+const year = new Date().getFullYear();
+const socials = Object.entries(site.social).filter(([, v]) => v);
+const socialLabels: Record<string, string> = {
+  instagram: 'Instagram',
+  instagramStudio: 'Instagram · Studio',
+  xiaohongshu: 'Xiaohongshu',
+  weibo: 'Weibo',
+};
+---
+
+<footer class="site-footer">
+  <div class="container grid">
+    <div class="col brand-col">
+      <p class="name">{site.name}</p>
+      <p class="muted">{site.intro}</p>
+    </div>
+
+    <nav class="col" aria-label="Categories">
+      <p class="label">Work</p>
+      {categories.map((c) => <a class="foot-link" href={`/${c.slug}`}>{c.name}</a>)}
+    </nav>
+
+    <nav class="col" aria-label="Site">
+      <p class="label">Site</p>
+      <a class="foot-link" href="/about">About</a>
+      <a class="foot-link" href="/contact">Contact</a>
+    </nav>
+
+    <div class="col">
+      <p class="label">Contact</p>
+      <a class="foot-link" href={`mailto:${site.email}`}>{site.email}</a>
+      <p class="muted small">{site.location}</p>
+      {
+        socials.length > 0 && (
+          <div class="socials">
+            {socials.map(([k, v]) => (
+              <a class="foot-link" href={v} target="_blank" rel="noopener noreferrer">
+                {socialLabels[k] ?? k}
+              </a>
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </div>
+
+  <div class="container bottom">
+    <span class="muted small">© {year} {site.name}. All rights reserved.</span>
+    <a class="muted small back-to-top" href="#top">Back to top ↑</a>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--line);
+    padding-block: clamp(2.5rem, 6vw, 4.5rem) 1.5rem;
+    margin-top: var(--section-y);
+  }
+  .grid {
+    display: grid;
+    gap: 2rem 2.5rem;
+    grid-template-columns: 1fr;
+  }
+  .col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+  .brand-col {
+    gap: 0.9rem;
+  }
+  .name {
+    font-size: 1.15rem;
+    color: var(--fg-strong);
+    margin: 0;
+  }
+  .muted {
+    color: var(--muted);
+    margin: 0;
+    max-width: 32ch;
+  }
+  .small {
+    font-size: 0.82rem;
+  }
+  .label {
+    margin-bottom: 0.3rem;
+  }
+  .foot-link {
+    color: var(--fg);
+    font-size: 0.92rem;
+    width: fit-content;
+  }
+  .foot-link:hover {
+    color: var(--accent);
+  }
+  .socials {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.3rem;
+  }
+  .bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: clamp(2rem, 5vw, 3.5rem);
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--line);
+  }
+  .back-to-top:hover {
+    color: var(--fg-strong);
+  }
+
+  @media (min-width: 720px) {
+    .grid {
+      grid-template-columns: 2fr 1fr 1fr 1.4fr;
+    }
+  }
+</style>

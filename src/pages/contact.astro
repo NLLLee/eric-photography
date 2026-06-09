@@ -1,0 +1,263 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site, WEB3FORMS_ACCESS_KEY } from '../lib/site';
+import { categories } from '../lib/categories';
+
+const hasKey = WEB3FORMS_ACCESS_KEY.length > 0;
+---
+
+<BaseLayout
+  title="Contact"
+  description={`Get in touch with ${site.name} to book portrait, landscape, or street photography.`}
+>
+  <!-- preconnect to speed up the first form submission -->
+  <link rel="preconnect" href="https://api.web3forms.com" />
+
+  <section class="container contact">
+    <div class="lead">
+      <span class="label">Contact</span>
+      <h1 class="title">Let's talk about your shoot</h1>
+      <p class="desc">
+        Graduation, marriage registration, creative portraits, or a landscape / street
+        session — fill out the form below and I'll usually reply within 24 hours.
+      </p>
+
+      <dl class="details">
+        <div>
+          <dt class="label">Email</dt>
+          <dd><a class="link-underline" href={`mailto:${site.email}`}>{site.email}</a></dd>
+        </div>
+        <div>
+          <dt class="label">Based in</dt>
+          <dd>{site.location}</dd>
+        </div>
+      </dl>
+    </div>
+
+    <form class="form" data-contact-form>
+      {
+        !hasKey && (
+          <p class="warn">
+            ⚠️ No Web3Forms key configured yet. Set <code>PUBLIC_WEB3FORMS_ACCESS_KEY</code>
+            in <code>.env</code> so the form can actually send.
+          </p>
+        )
+      }
+
+      <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
+      <input type="hidden" name="subject" value={`New inquiry · ${site.name}`} />
+      <input type="hidden" name="from_name" value={`${site.name} Portfolio`} />
+      <!-- honeypot: bots fill this, humans never see it -->
+      <input
+        type="checkbox"
+        name="botcheck"
+        class="hp"
+        tabindex="-1"
+        autocomplete="off"
+      />
+
+      <div class="field">
+        <label for="name">Name *</label>
+        <input id="name" name="name" type="text" required autocomplete="name" />
+      </div>
+
+      <div class="field">
+        <label for="email">Email *</label>
+        <input id="email" name="email" type="email" required autocomplete="email" />
+      </div>
+
+      <div class="field">
+        <label for="type">What are you after?</label>
+        <select id="type" name="Shoot type">
+          {categories.map((c) => <option value={c.name}>{c.name}</option>)}
+          <option value="Other">Other / not sure</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="message">Message *</label>
+        <textarea
+          id="message"
+          name="message"
+          rows="5"
+          required
+          placeholder="Dates, location, number of people, or anything on your mind…"></textarea>
+      </div>
+
+      <button class="btn btn--accent submit" type="submit">Send inquiry</button>
+
+      <p class="status" data-status role="status" aria-live="polite"></p>
+    </form>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact {
+    display: grid;
+    gap: clamp(2.4rem, 5vw, 4.5rem);
+    grid-template-columns: 1fr;
+    padding-top: clamp(3rem, 8vw, 6rem);
+    align-items: start;
+  }
+  @media (min-width: 880px) {
+    .contact {
+      grid-template-columns: 0.9fr 1.1fr;
+    }
+  }
+
+  .lead {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .title {
+    font-size: clamp(1.9rem, 4vw, 3rem);
+    max-width: 16ch;
+  }
+  .desc {
+    color: var(--muted);
+    max-width: 46ch;
+  }
+  .details {
+    display: flex;
+    gap: 2.5rem;
+    margin: 1.5rem 0 0;
+  }
+  .details dt {
+    margin-bottom: 0.3rem;
+  }
+  .details dd {
+    margin: 0;
+    color: var(--fg);
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .field label {
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  input,
+  select,
+  textarea {
+    font: inherit;
+    color: var(--fg-strong);
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 0.85rem 1rem;
+    width: 100%;
+    transition: border-color 0.2s var(--ease), background 0.2s var(--ease);
+  }
+  textarea {
+    resize: vertical;
+  }
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: #1a1a1d;
+  }
+  select {
+    appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%),
+      linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+    background-position: calc(100% - 20px) center, calc(100% - 15px) center;
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+  }
+
+  .hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+
+  .submit {
+    align-self: flex-start;
+    margin-top: 0.4rem;
+  }
+  .submit[disabled] {
+    opacity: 0.5;
+    cursor: progress;
+  }
+
+  .status {
+    margin: 0;
+    font-size: 0.9rem;
+    min-height: 1.2em;
+  }
+  .status[data-state='ok'] {
+    color: #5fd07a;
+  }
+  .status[data-state='err'] {
+    color: var(--accent);
+  }
+
+  .warn {
+    color: #e7c14b;
+    background: rgba(231, 193, 75, 0.08);
+    border: 1px solid rgba(231, 193, 75, 0.3);
+    padding: 0.9rem 1rem;
+    border-radius: 8px;
+    font-size: 0.88rem;
+  }
+  .warn code {
+    color: #fff;
+  }
+</style>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+  const status = document.querySelector<HTMLParagraphElement>('[data-status]');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!status) return;
+
+    const button = form.querySelector<HTMLButtonElement>('.submit');
+    const data = Object.fromEntries(new FormData(form));
+
+    button && (button.disabled = true);
+    status.dataset.state = '';
+    status.textContent = 'Sending…';
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+      const json = await res.json();
+      if (json.success) {
+        status.dataset.state = 'ok';
+        status.textContent = "Got it — thank you! I'll get back to you soon.";
+        form.reset();
+      } else {
+        status.dataset.state = 'err';
+        status.textContent = json.message || 'Something went wrong. Please try again or email me directly.';
+      }
+    } catch {
+      status.dataset.state = 'err';
+      status.textContent = 'Network error — please email me directly instead.';
+    } finally {
+      button && (button.disabled = false);
+    }
+  });
+</script>

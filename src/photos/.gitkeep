@@ -1,0 +1,2 @@
+# Web-ready "large" masters live here (output of `npm run photos`, or drop your own).
+# Astro optimizes these into responsive WebP/AVIF at build time.

@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { categories } from '../lib/categories';
+---
+
+<BaseLayout title="Page not found">
+  <section class="container notfound">
+    <span class="label accent">404</span>
+    <h1 class="title">Nothing here</h1>
+    <p class="desc">This page may have moved or never existed. Try one of these instead:</p>
+    <div class="links">
+      <a class="btn" href="/">Home</a>
+      {categories.map((c) => <a class="btn" href={`/${c.slug}`}>{c.name}</a>)}
+      <a class="btn" href="/contact">Contact</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .notfound {
+    min-height: 64svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    padding-block: var(--section-y);
+  }
+  .title {
+    font-size: clamp(2rem, 6vw, 3.4rem);
+  }
+  .desc {
+    color: var(--muted);
+  }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-top: 1rem;
+  }
+</style>

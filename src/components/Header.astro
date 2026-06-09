@@ -1,0 +1,179 @@
+---
+import { site } from '../lib/site';
+import { categories } from '../lib/categories';
+
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path.startsWith(href);
+
+const navLinks = [
+  ...categories.map((c) => ({ href: `/${c.slug}`, label: c.name })),
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
+];
+---
+
+<header class="site-header" data-header>
+  <div class="container bar">
+    <a class="brand" href="/" aria-label={`${site.name} home`}>{site.name}</a>
+
+    <nav class="nav" aria-label="Primary navigation">
+      {
+        navLinks.map((l) => (
+          <a
+            class="nav-link link-underline"
+            href={l.href}
+            aria-current={isActive(l.href) ? 'page' : undefined}
+          >
+            {l.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      data-menu-toggle
+    >
+      <span></span><span></span>
+    </button>
+  </div>
+
+  <div class="mobile-menu" id="mobile-menu" data-mobile-menu hidden>
+    <nav class="mobile-nav" aria-label="Mobile navigation">
+      {
+        navLinks.map((l) => (
+          <a
+            class="mobile-link"
+            href={l.href}
+            aria-current={isActive(l.href) ? 'page' : undefined}
+          >
+            {l.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    backdrop-filter: saturate(140%) blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+  .brand {
+    font-size: 1.02rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--fg-strong);
+  }
+  .nav {
+    display: none;
+    gap: clamp(1.2rem, 3vw, 2.4rem);
+  }
+  .nav-link {
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+  .nav-link:hover,
+  .nav-link[aria-current='page'] {
+    color: var(--fg-strong);
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    background: none;
+    border: 0;
+    cursor: pointer;
+  }
+  .menu-toggle span {
+    display: block;
+    height: 1.5px;
+    width: 22px;
+    margin-inline: auto;
+    background: var(--fg);
+    transition: transform 0.3s var(--ease), opacity 0.2s var(--ease);
+  }
+  .site-header[data-open] .menu-toggle span:nth-child(1) {
+    transform: translateY(3.25px) rotate(45deg);
+  }
+  .site-header[data-open] .menu-toggle span:nth-child(2) {
+    transform: translateY(-3.25px) rotate(-45deg);
+  }
+
+  .mobile-menu {
+    border-top: 1px solid var(--line);
+    background: var(--bg);
+  }
+  .mobile-nav {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem var(--gutter) 1.5rem;
+  }
+  .mobile-link {
+    padding: 0.95rem 0;
+    font-size: 1.1rem;
+    color: var(--fg);
+    border-bottom: 1px solid var(--line);
+  }
+  .mobile-link[aria-current='page'] {
+    color: var(--accent);
+  }
+
+  @media (min-width: 800px) {
+    .nav {
+      display: flex;
+    }
+    .menu-toggle,
+    .mobile-menu {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const menu = document.querySelector<HTMLElement>('[data-mobile-menu]');
+
+  function setOpen(open: boolean) {
+    if (!header || !toggle || !menu) return;
+    header.toggleAttribute('data-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    menu.hidden = !open;
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  toggle?.addEventListener('click', () => {
+    setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+  });
+  // Close when navigating or pressing Escape.
+  menu?.addEventListener('click', (e) => {
+    if ((e.target as HTMLElement).closest('a')) setOpen(false);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setOpen(false);
+  });
+</script>

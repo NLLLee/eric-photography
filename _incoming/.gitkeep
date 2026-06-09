@@ -1,0 +1,2 @@
+# Drop your raw camera originals here, then run:  npm run photos
+# The script strips EXIF, downscales, and writes web-ready files into src/photos/.

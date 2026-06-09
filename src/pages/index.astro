@@ -1,0 +1,186 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CategoryCard from '../components/CategoryCard.astro';
+import MasonryGallery from '../components/MasonryGallery.astro';
+import { site } from '../lib/site';
+import { categories } from '../lib/categories';
+import { featuredPhotos, coverFor } from '../lib/photos';
+import { resolveLarge } from '../lib/images';
+
+const featured = featuredPhotos();
+const hero = resolveLarge(site.heroPhoto) ?? featured[0]?.large;
+---
+
+<BaseLayout description={site.description}>
+  <!-- ── HERO ───────────────────────────────────────────────────────────── -->
+  <section class="hero">
+    {
+      hero && (
+        <Image
+          class="hero-img"
+          src={hero}
+          alt=""
+          widths={[768, 1280, 1920, 2560]}
+          sizes="100vw"
+          loading="eager"
+          fetchpriority="high"
+        />
+      )
+    }
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <p class="label hero-eyebrow">Photography</p>
+      <h1 class="hero-title">{site.tagline}</h1>
+      <p class="hero-intro">{site.intro}</p>
+      <div class="hero-actions">
+        <a class="btn btn--accent" href="#work">View work</a>
+        <a class="btn" href="/contact">Book a session</a>
+      </div>
+    </div>
+    <a class="scroll-hint" href="#work" aria-label="Scroll down">↓</a>
+  </section>
+
+  <!-- ── CATEGORY ENTRIES ───────────────────────────────────────────────── -->
+  <section class="section" id="work">
+    <div class="container">
+      <header class="sec-head">
+        <span class="label">Work</span>
+        <h2 class="sec-title">Three directions</h2>
+        <p class="sec-desc">From portraits to landscapes and the street — honest, restrained moments.</p>
+      </header>
+      <div class="cat-grid">
+        {
+          categories.map((c, i) => (
+            <CategoryCard
+              href={`/${c.slug}`}
+              name={c.name}
+              blurb={c.blurb}
+              index={i}
+              cover={coverFor(c.slug)}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FEATURED ───────────────────────────────────────────────────────── -->
+  {
+    featured.length > 0 && (
+      <section class="section featured">
+        <div class="container">
+          <header class="sec-head">
+            <span class="label">Featured</span>
+            <h2 class="sec-title">Recent work</h2>
+          </header>
+          <MasonryGallery photos={featured} galleryId="featured" />
+        </div>
+      </section>
+    )
+  }
+</BaseLayout>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: min(92svh, 900px);
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    background: #060607;
+  }
+  .hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(0.1) brightness(0.78);
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(6, 6, 7, 0.35) 0%,
+      rgba(6, 6, 7, 0.1) 40%,
+      rgba(6, 6, 7, 0.85) 100%
+    );
+  }
+  .hero-content {
+    position: relative;
+    padding-bottom: clamp(3rem, 9vw, 6rem);
+    padding-top: 6rem;
+  }
+  .hero-eyebrow {
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 1.2rem;
+  }
+  .hero-title {
+    font-size: clamp(2.4rem, 7vw, 5.2rem);
+    line-height: 1.02;
+    max-width: 16ch;
+    color: #fff;
+  }
+  .hero-intro {
+    margin-top: 1.4rem;
+    max-width: 46ch;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: clamp(1rem, 1.3vw, 1.12rem);
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 2rem;
+  }
+  .scroll-hint {
+    position: absolute;
+    bottom: 1.4rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.2rem;
+    animation: bob 2s var(--ease) infinite;
+  }
+  @keyframes bob {
+    0%,
+    100% {
+      transform: translate(-50%, 0);
+    }
+    50% {
+      transform: translate(-50%, 6px);
+    }
+  }
+
+  .sec-head {
+    margin-bottom: clamp(1.8rem, 4vw, 3rem);
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+  .sec-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+  }
+  .sec-desc {
+    color: var(--muted);
+    margin: 0;
+    max-width: 44ch;
+  }
+
+  .cat-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(2rem, 4vw, 3rem);
+  }
+  @media (min-width: 720px) {
+    .cat-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .featured {
+    border-top: 1px solid var(--line);
+  }
+</style>

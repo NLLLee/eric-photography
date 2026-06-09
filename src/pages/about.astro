@@ -1,0 +1,161 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../lib/site';
+import { categories } from '../lib/categories';
+import { coverFor } from '../lib/photos';
+
+// Use a portrait as the about image; fall back gracefully.
+const portrait = coverFor('portraits') ?? coverFor('street');
+
+const services = [
+  { name: 'Graduation', desc: 'A fitting close to your campus years — youth in natural light.' },
+  { name: 'Marriage Registration', desc: 'From early morning to the stamp on the certificate, documented honestly.' },
+  { name: 'Creative Portraits', desc: 'Light and concept shaped into images that are entirely yours.' },
+  { name: 'Landscape', desc: 'The vastness of travel and place, as a quiet backdrop.' },
+  { name: 'Street', desc: "The city's chance encounters — unrehearsed and real." },
+];
+---
+
+<BaseLayout title="About" description={`About ${site.name} — ${site.intro}`}>
+  <section class="container about">
+    <div class="intro">
+      <span class="label">About</span>
+      <h1 class="title">{site.intro}</h1>
+      <div class="body">
+        <p>
+          Hi, I'm {site.name}, a photographer based in {site.location}. I believe a good
+          photograph isn't about perfection but about truth — an offhand glance, a shaft of
+          just-right light, a relationship held still.
+        </p>
+        <p>
+          Over the past few years I've walked with many people through the moments that matter —
+          graduations, marriage registrations, anniversaries — and kept shooting between the city
+          and the wild. I love restrained color and negative space, letting the people and feeling
+          in the frame be the only subject.
+        </p>
+        <p>
+          If this quiet, honest kind of imagery speaks to you, I'd love to hear your story.
+        </p>
+      </div>
+      <a class="btn btn--accent" href="/contact">Book a session →</a>
+    </div>
+
+    {
+      portrait && (
+        <div class="portrait">
+          <Image
+            src={portrait.thumb}
+            alt={portrait.alt}
+            widths={[400, 700, 1000]}
+            sizes="(min-width: 900px) 40vw, 90vw"
+            loading="eager"
+          />
+        </div>
+      )
+    }
+  </section>
+
+  <section class="container section services">
+    <header class="sec-head">
+      <span class="label">Services</span>
+      <h2 class="sec-title">What I can offer</h2>
+    </header>
+    <ul class="service-list">
+      {
+        services.map((s, i) => (
+          <li class="service">
+            <span class="s-num label">{String(i + 1).padStart(2, '0')}</span>
+            <div>
+              <h3 class="s-name">{s.name}</h3>
+              <p class="s-desc">{s.desc}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+    <div class="cat-links">
+      {categories.map((c) => <a class="btn" href={`/${c.slug}`}>{c.name}</a>)}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .about {
+    display: grid;
+    gap: clamp(2rem, 5vw, 4rem);
+    grid-template-columns: 1fr;
+    padding-top: clamp(3rem, 8vw, 6rem);
+    align-items: start;
+  }
+  @media (min-width: 900px) {
+    .about {
+      grid-template-columns: 1.1fr 0.9fr;
+    }
+  }
+  .intro {
+    display: flex;
+    flex-direction: column;
+    gap: 1.3rem;
+    align-items: flex-start;
+  }
+  .title {
+    font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+    line-height: 1.18;
+    max-width: 28ch;
+  }
+  .body {
+    color: var(--muted);
+    max-width: 56ch;
+  }
+  .body p {
+    margin-bottom: 1em;
+  }
+  .portrait {
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: var(--bg-elev);
+  }
+  .portrait :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(0.1);
+  }
+
+  .services {
+    border-top: 1px solid var(--line);
+    margin-top: var(--section-y);
+  }
+  .service-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0;
+  }
+  .service {
+    display: flex;
+    gap: 1.4rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .s-num {
+    color: var(--accent);
+    padding-top: 0.35rem;
+  }
+  .s-name {
+    font-size: 1.25rem;
+    margin-bottom: 0.2rem;
+  }
+  .s-desc {
+    color: var(--muted);
+    margin: 0;
+  }
+  .cat-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-top: 2rem;
+  }
+</style>

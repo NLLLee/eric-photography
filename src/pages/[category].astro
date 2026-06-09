@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MasonryGallery from '../components/MasonryGallery.astro';
+import { categories, getCategory } from '../lib/categories';
+import { photosByCategory } from '../lib/photos';
+
+export function getStaticPaths() {
+  return categories.map((c) => ({ params: { category: c.slug } }));
+}
+
+const { category } = Astro.params;
+const cat = getCategory(category!);
+// getStaticPaths only emits valid slugs, so this always resolves at build time.
+if (!cat) throw new Error(`Unknown category: ${category}`);
+
+const photos = photosByCategory(cat.slug);
+const count = photos.length;
+---
+
+<BaseLayout title={cat.name} description={`${cat.name} photography — ${cat.blurb}`}>
+  <section class="container page-head">
+    <span class="label">Work / {cat.name}</span>
+    <h1 class="page-title">{cat.name}</h1>
+    <p class="page-blurb">{cat.blurb}</p>
+    {count > 0 && <span class="count label">{count} photos</span>}
+  </section>
+
+  <section class="container gallery-wrap">
+    <MasonryGallery photos={photos} subtags={cat.subtags} galleryId={cat.slug} />
+  </section>
+</BaseLayout>
+
+<style>
+  .page-head {
+    padding-top: clamp(2.5rem, 7vw, 5rem);
+    padding-bottom: clamp(1.6rem, 4vw, 2.6rem);
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+  .page-title {
+    font-size: clamp(2.2rem, 6vw, 3.6rem);
+  }
+  .page-blurb {
+    color: var(--muted);
+    margin: 0;
+    max-width: 50ch;
+  }
+  .count {
+    color: var(--muted-2);
+  }
+  .gallery-wrap {
+    padding-bottom: var(--section-y);
+  }
+</style>
