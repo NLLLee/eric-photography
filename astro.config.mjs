@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 
 // IMPORTANT: change this to your real domain once deployed (used for SEO,
 // canonical URLs and sitemap). e.g. 'https://eric-photo.vercel.app'
-const SITE_URL = process.env.SITE_URL ?? 'https://your-domain.vercel.app';
+const SITE_URL = process.env.SITE_URL ?? 'https://eric-photography.vercel.app';
 
 // https://astro.build
 export default defineConfig({
